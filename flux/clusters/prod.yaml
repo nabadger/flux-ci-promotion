@@ -21,7 +21,7 @@ spec:
       - args:
         - --memcached-service=
         - --ssh-keygen-dir=/var/fluxd/keygen
-        - --git-url=git@gitlab.com:nabadger/flux-ci-promotion.git
+        - --git-url=git@github.com:nabadger/flux-ci-promotion.git
         - --git-branch=master
         - --git-path=kustomize/prod/
         - --listen-metrics=:3031
@@ -36,9 +36,6 @@ spec:
             cpu: 50m
             memory: 64Mi
         volumeMounts:
-        - name: git-key
-          mountPath: /etc/fluxd/ssh # to match location given in image's /etc/ssh/config
-          readOnly: true # this will be the case perforce in K8s >=1.10                
         - mountPath: /var/fluxd/keygen
           name: git-keygen
       dnsPolicy: ClusterFirst
@@ -46,10 +43,6 @@ spec:
       serviceAccountName: flux
       terminationGracePeriodSeconds: 30
       volumes:
-      - name: git-key
-        secret:
-          secretName: flux-git-deploy
-          defaultMode: 0400 # when mounted read-only, we won't be able to chmod              
       - emptyDir:
           medium: Memory
         name: git-keygen
