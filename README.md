@@ -60,6 +60,15 @@ kubectl apply -f ./bootstrap
 kubectl apply -f ./flux/
 kubectl apply -f ./flux/clusters/staging.yaml
 ```
+## Confirm cluster workloads
+
+```
+NAME                                 READY     STATUS    RESTARTS   AGE
+flux-59d479788d-7dhnr                1/1       Running   0          7m
+memcached-76964fb66f-ms6bb           1/1       Running   0          7m
+team-a-echoserver-6dcd6cb759-8d42q   1/1       Running   0          7s
+team-b-echoserver-68d8bbf5d-gmhtx    1/1       Running   0          7s
+```
 
 ## Setup Git Deploy Key
 
