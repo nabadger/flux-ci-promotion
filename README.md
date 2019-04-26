@@ -47,6 +47,7 @@ Dev Cluster:
 
 ```
 export KUBECONFIG=$(kind get kubeconfig-path --name dev)
+kubectl apply -f ./bootstrap
 kubectl apply -f ./flux/
 kubectl apply -f ./flux/clusters/dev.yaml
 ```
@@ -55,18 +56,44 @@ Staging Cluster:
 
 ```
 export KUBECONFIG=$(kind get kubeconfig-path --name staging)
+kubectl apply -f ./bootstrap
 kubectl apply -f ./flux/
 kubectl apply -f ./flux/clusters/staging.yaml
 ```
+## Confirm cluster workloads
+
+```
+NAME                                 READY     STATUS    RESTARTS   AGE
+flux-59d479788d-7dhnr                1/1       Running   0          7m
+memcached-76964fb66f-ms6bb           1/1       Running   0          7m
+team-a-echoserver-6dcd6cb759-8d42q   1/1       Running   0          7s
+team-b-echoserver-68d8bbf5d-gmhtx    1/1       Running   0          7s
+```
+
+## Setup Git Deploy Key
+
+```
+fluxctl identity
+```
+
+Add public-key from above command to the Git repo Deploy Key. Requires `write` access.
 
 ## Monitor workloads 
 
 ```
-fluxctl list-images --workload=default:deployment/dev-echo
+fluxctl list-workloads
+```
+
+```
+WORKLOAD                              CONTAINER     IMAGE                                                  RELEASE  POLICY
+default:deployment/flux               flux          docker.io/2opremio/flux:generators-releasers-8baf8bd0  ready    
+default:deployment/memcached          memcached     memcached:1.4.25                                       ready    
+default:deployment/team-a-echoserver  my-container  nabadger/echoserver:dev-test-1                         ready    
+default:deployment/team-b-echoserver  my-container  nabadger/echoserver:dev-test-1                         ready    
 ```
 
 ## Release a new image
 
 ```
-fluxctl release --workload=default:deployment/dev-echo --update-image=nabadger/echoserver:dev-test-1
+fluxctl release -n default --workload=default:deployment/team-a-echoserver --update-image=nabadger/echoserver:dev-test-2
 ```
