@@ -23,4 +23,4 @@ spec:
       containers:
       - imagePullPolicy: IfNotPresent
         name: my-container
-        image: my-image
+        image: nabadger/echoserver:dev-test-1

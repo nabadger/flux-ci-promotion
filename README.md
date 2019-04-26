@@ -23,7 +23,7 @@ export KUBECONFIG=$(kind get kubeconfig-path --name staging)
 export KUBECONFIG=$(kind get kubeconfig-path --name prod)
 ```
 
-## Create and tag echo-headers image
+## Create and tag echoserver
 
 Create some example tags and upload them to dockerhub (or whereever).
 
