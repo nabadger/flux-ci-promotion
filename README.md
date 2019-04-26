@@ -97,3 +97,15 @@ default:deployment/team-b-echoserver  my-container  nabadger/echoserver:dev-test
 ```
 fluxctl release -n default --workload=default:deployment/team-a-echoserver --update-image=nabadger/echoserver:dev-test-2
 ```
+
+## Current issues
+
+Can't get kubeyaml + flux to create the patch file.
+
+My general idea is that:
+
+1 - We pre-create a template patch file. It would be annoying to have todo this for each workload (there could be 100s).
+2 - flux+kubeyaml via `.flux.yaml` utilzes the patch file and either creates or updates a patch as required
+3 - We use `kustomize edit add patches/patch-*.yaml` to keep kustomize informed of our patches.
+
+This currently fails as as `FLUX_WL_NAME` will never match what's in our template.
