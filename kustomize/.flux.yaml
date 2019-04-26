@@ -6,8 +6,9 @@ updaters:
   - containerImage:
       command: >-
         echo 'n' | cp -i ./patches/template-patch-flux.yaml ./patches/patch-flux-$FLUX_WL_NAME.yaml &&
-        cat ./patches/patch-flux-$FLUX_WL_NAME.yaml | 
-        kubeyaml image --namespace $FLUX_WL_NS --kind $FLUX_WL_KIND --name $FLUX_WL_NAME --container $FLUX_CONTAINER --image "$FLUX_IMG:$FLUX_TAG"
-        > ./patches/new-patch-flux-$FLUX_WL_NAME.yaml && 
-        mv ./patches/new-patch-flux-$FLUX_WL_NAME.yaml ./patches/patch-flux-$FLUX_WL_NAME.yaml &&
+        sed 's/$FLUX_CONTAINER/'"$FLUX_CONTAINER"'/' -i ./patches/patch-flux-$FLUX_WL_NAME.yaml &&
+        sed 's/$FLUX_IMG/'"$FLUX_IMG"'/' -i ./patches/patch-flux-$FLUX_WL_NAME.yaml &&
+        sed 's/$FLUX_TAG/'"$FLUX_TAG"'/' -i ./patches/patch-flux-$FLUX_WL_NAME.yaml &&
+        sed 's/$FLUX_WL_NAME/'"$FLUX_WL_NAME"'/' -i ./patches/patch-flux-$FLUX_WL_NAME.yaml &&
+        sed 's/$FLUX_WL_NS/'"$FLUX_WL_NS"'/' -i ./patches/patch-flux-$FLUX_WL_NAME.yaml &&
         kustomize edit add patch patches/*.yaml

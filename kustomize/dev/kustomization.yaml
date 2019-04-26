@@ -7,3 +7,5 @@ commonAnnotations:
 bases:
 - ../base/team-a-app
 - ../base/team-b-app
+patchesStrategicMerge:
+- patches/patch-flux-team-a-echoserver.yaml
