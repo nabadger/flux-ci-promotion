@@ -5,7 +5,7 @@ updaters:
   # use https://github.com/squaremo/kubeyaml on flux-patch.yaml
   - containerImage:
       command: >-
-        echo 'n' | cp -i ./patches/template-patch-flux.yaml ./patch-flux-$FLUX_WL_NAME &&
+        echo 'n' | cp -i ./patches/template-patch-flux.yaml ./patches/patch-flux-$FLUX_WL_NAME &&
         cat ./patches/patch-flux-$FLUX_WL_NAME.yaml | 
         kubeyaml image --namespace $FLUX_WL_NS --kind $FLUX_WL_KIND --name $FLUX_WL_NAME --container $FLUX_CONTAINER --image "$FLUX_IMG:$FLUX_TAG"
         > ./patches/new-patch-flux-$FLUX_WL_NAME.yaml && 
