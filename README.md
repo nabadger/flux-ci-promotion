@@ -47,6 +47,7 @@ Dev Cluster:
 
 ```
 export KUBECONFIG=$(kind get kubeconfig-path --name dev)
+kubectl apply -f ./bootstrap
 kubectl apply -f ./flux/
 kubectl apply -f ./flux/clusters/dev.yaml
 ```
@@ -55,9 +56,18 @@ Staging Cluster:
 
 ```
 export KUBECONFIG=$(kind get kubeconfig-path --name staging)
+kubectl apply -f ./bootstrap
 kubectl apply -f ./flux/
 kubectl apply -f ./flux/clusters/staging.yaml
 ```
+
+## Setup Git Deploy Key
+
+```
+fluxctl identity
+```
+
+Add public-key from above command to the Git repo Deploy Key. Requires `write` access.
 
 ## Monitor workloads 
 
