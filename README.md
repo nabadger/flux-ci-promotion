@@ -81,11 +81,19 @@ Add public-key from above command to the Git repo Deploy Key. Requires `write` a
 ## Monitor workloads 
 
 ```
-fluxctl list-images --workload=default:deployment/dev-echo
+fluxctl list-workloads
+```
+
+```
+WORKLOAD                              CONTAINER     IMAGE                                                  RELEASE  POLICY
+default:deployment/flux               flux          docker.io/2opremio/flux:generators-releasers-8baf8bd0  ready    
+default:deployment/memcached          memcached     memcached:1.4.25                                       ready    
+default:deployment/team-a-echoserver  my-container  nabadger/echoserver:dev-test-1                         ready    
+default:deployment/team-b-echoserver  my-container  nabadger/echoserver:dev-test-1                         ready    
 ```
 
 ## Release a new image
 
 ```
-fluxctl release --workload=default:deployment/dev-echo --update-image=nabadger/echoserver:dev-test-1
+fluxctl release -n default --workload=default:deployment/team-a-echoserver --update-image=nabadger/echoserver:dev-test-2
 ```
