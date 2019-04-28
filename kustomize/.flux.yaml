@@ -22,4 +22,3 @@ spec:
         image: $FLUX_IMG:$FLUX_TAG
 
 EOF
-        kustomize edit add patch patches/*.yaml
