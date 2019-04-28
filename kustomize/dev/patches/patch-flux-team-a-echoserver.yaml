@@ -11,4 +11,4 @@ spec:
     spec:
       containers:
       - name: my-container
-        image: nbadger/echoserver:dev-test-1
+        image: nabadger/echoserver:dev-test-1
