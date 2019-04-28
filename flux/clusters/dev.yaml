@@ -22,7 +22,7 @@ spec:
         - --memcached-service=
         - --ssh-keygen-dir=/var/fluxd/keygen
         - --git-url=git@github.com:nabadger/flux-ci-promotion.git
-        - --git-branch=master
+        - --git-branch=local-testing
         - --git-path=kustomize/dev/
         - --listen-metrics=:3031
         image: docker.io/2opremio/flux:generators-releasers-8baf8bd0
