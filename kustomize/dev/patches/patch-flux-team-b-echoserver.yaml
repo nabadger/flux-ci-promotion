@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: team-a-echoserver
+  name: team-b-echoserver
   namespace: default
   annotations:
     flux.weave.works/automated: 'true'
@@ -11,4 +11,4 @@ spec:
     spec:
       containers:
       - name: my-container
-        image: image
+        image: nbadger/echoserver:dev-test-1

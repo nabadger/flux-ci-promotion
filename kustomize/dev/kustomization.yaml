@@ -9,3 +9,4 @@ bases:
 - ../base/team-b-app
 patchesStrategicMerge:
 - patches/patch-flux-team-a-echoserver.yaml
+- patches/patch-flux-team-b-echoserver.yaml
